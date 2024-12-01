@@ -47,6 +47,7 @@ kapt {
 
 dependencies {
 
+    implementation (libs.glide)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.navigation.ui)
     implementation(libs.hilt.android)

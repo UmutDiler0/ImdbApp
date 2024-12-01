@@ -1,9 +1,12 @@
 package com.example.imdbapp.adapters
 
 import android.graphics.Movie
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.imdbapp.R
 import com.example.imdbapp.databinding.FragmentHomeBinding
 import com.example.imdbapp.databinding.HomeItemBinding
 import com.example.imdbapp.models.Movies
@@ -17,6 +20,11 @@ class HomeAdapter(val list: List<Movies>): RecyclerView.Adapter<HomeAdapter.View
                 movieTypeTV.text = movies.type
                 movieYearTV.text = movies.year
             }
+            Glide.with(itemView.context)
+                .load(movies.poster)
+                .placeholder(R.drawable.place_holder)
+                .error(R.drawable.ic_unfav)
+                .into(binding.movieIV)
         }
     }
 

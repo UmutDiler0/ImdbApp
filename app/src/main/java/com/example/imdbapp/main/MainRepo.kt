@@ -1,6 +1,7 @@
 package com.example.imdbapp.main
 
 import android.annotation.SuppressLint
+import android.util.Log
 import com.example.imdbapp.adapters.HomeAdapter
 import com.example.imdbapp.models.MovieResponse
 import com.example.imdbapp.repository.MovieApi
