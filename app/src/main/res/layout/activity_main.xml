@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:background="@color/black"
         app:menu="@menu/bottomnav_menu"
+        app:itemIconTint="@color/yellow"
         app:labelVisibilityMode="labeled" />
 
 </LinearLayout>

@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.imdbapp.R
 import com.example.imdbapp.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
