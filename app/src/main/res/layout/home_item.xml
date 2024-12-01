@@ -2,11 +2,69 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="16dp"
     android:layout_marginHorizontal="16dp"
     android:elevation="12dp"
     app:cardCornerRadius="12dp"
+    android:backgroundTint="@color/gray"
     android:layout_height="150dp">
+
+    <ImageView
+        android:id="@+id/movieIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center|start"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_marginStart="8dp"/>
+
+    <TextView
+        android:id="@+id/movieNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Inception"
+        android:textColor="@color/white"
+        android:layout_gravity="center|top"
+        android:gravity="center"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="24dp"
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/movieTypeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Horror"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_gravity="center|top"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="64dp"
+        android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/movieYearTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="2017"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_gravity="center|top"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="100dp"
+        android:textSize="16sp"/>
+
+    <ImageButton
+        android:id="@+id/favBtn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/favbtn_bg"
+        android:src="@drawable/ic_unfav"
+        android:layout_gravity="end|center"
+        android:layout_marginEnd="16dp"/>
+
+
+
+
 
 
 
