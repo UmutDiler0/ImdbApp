@@ -10,57 +10,89 @@
     android:backgroundTint="@color/gray"
     android:layout_height="150dp">
 
-    <ImageView
-        android:id="@+id/movieIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center|start"
-        android:src="@drawable/ic_launcher_background"
-        android:layout_marginStart="8dp"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/movieNameTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Inception"
-        android:textColor="@color/white"
-        android:layout_gravity="center|top"
-        android:gravity="center"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="24dp"
-        android:textSize="18sp"/>
-    <TextView
-        android:id="@+id/movieTypeTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Horror"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:layout_gravity="center|top"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="64dp"
-        android:textSize="16sp"/>
-    <TextView
-        android:id="@+id/movieYearTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="2017"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:layout_gravity="center|top"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="100dp"
-        android:textSize="16sp"/>
+        <ImageView
+            android:id="@+id/movieIV"
+            android:layout_width="150dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center|start"
+            android:scaleType="centerCrop"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/favBtn"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/favbtn_bg"
-        android:src="@drawable/ic_unfav"
-        android:layout_gravity="end|center"
-        android:layout_marginEnd="16dp"/>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center|start"
+            app:layout_constraintBottom_toBottomOf="@+id/movieIV"
+            app:layout_constraintEnd_toEndOf="@+id/movieIV"
+            app:layout_constraintStart_toStartOf="@+id/movieIV"
+            app:layout_constraintTop_toTopOf="@+id/movieIV" />
+
+        <TextView
+            android:id="@+id/movieNameTV"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/movieIV"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Inception" />
+
+        <TextView
+            android:id="@+id/movieTypeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:gravity="start"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/movieNameTV"
+            app:layout_constraintStart_toStartOf="@+id/movieNameTV"
+            app:layout_constraintTop_toBottomOf="@+id/movieNameTV"
+            tools:text="Horror" />
+
+        <TextView
+            android:id="@+id/movieYearTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/movieTypeTV"
+            app:layout_constraintStart_toStartOf="@+id/movieTypeTV"
+            app:layout_constraintTop_toBottomOf="@+id/movieTypeTV"
+            tools:text="2017" />
+
+        <ImageButton
+            android:id="@+id/favBtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="end|center"
+            android:background="@drawable/favbtn_bg"
+            android:src="@drawable/ic_unfav"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 

@@ -16,11 +16,27 @@
         app:menu="@menu/toolbar_menu"
         app:title="Movies"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homeRC"
+    <FrameLayout
+        android:id="@+id/homeFL"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"/>
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/homePB"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:indeterminateTint="@color/yellow"
+            android:layout_gravity="center"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homeRC"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"/>
+
+    </FrameLayout>
+
+
 
 </LinearLayout>

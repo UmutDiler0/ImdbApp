@@ -15,9 +15,10 @@ import javax.inject.Inject
 class MainRepo @Inject constructor(
     val movieApi: MovieApi
 ) {
-
+    var isResponseSuccess = false
     fun fetchData(adapter: HomeAdapter){
         val call = movieApi.getMoviesByName(token)
+
 
         call.enqueue(
             object: Callback<MovieResponse>{
@@ -28,7 +29,10 @@ class MainRepo @Inject constructor(
                             moviesList.clear()
                             moviesList.addAll(it.result)
                             adapter.notifyDataSetChanged()
+                            isResponseSuccess = it.success
                         }
+                    }else{
+                        isResponseSuccess = false
                     }
                 }
 
@@ -38,5 +42,7 @@ class MainRepo @Inject constructor(
 
             }
         )
+
     }
+
 }
