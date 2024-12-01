@@ -11,9 +11,9 @@ interface MovieApi {
     @GET("imdb/imdbSearchByName")
     fun getMoviesByName(
         @Header("Authorization") token: String,
-        @Query("query") movieName: String,
-        @Query("year") year: String,
-        @Query("type") type: String
+        @Query("query") movieName: String? = null,
+//        @Query("year") year: String,
+//        @Query("type") type: String
     ): Call<MovieResponse>
 
 }

@@ -6,14 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.imdbapp.R
+import com.example.imdbapp.adapters.HomeAdapter
 import com.example.imdbapp.databinding.FragmentHomeBinding
+import com.example.imdbapp.main.MainRepo
+import com.example.imdbapp.util.moviesList
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    @Inject lateinit var mainRepo: MainRepo
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +30,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val adapter = HomeAdapter(moviesList)
+        binding.homeRC.adapter = adapter
+        mainRepo.fetchData(adapter)
     }
 
 }

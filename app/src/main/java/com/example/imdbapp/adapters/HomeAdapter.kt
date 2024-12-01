@@ -10,9 +10,13 @@ import com.example.imdbapp.models.Movies
 
 class HomeAdapter(val list: List<Movies>): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
-    inner class ViewHolder(binding: HomeItemBinding): RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(val binding: HomeItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(movies: Movies){
-            TODO()
+            with(binding){
+                movieNameTV.text = movies.title
+                movieTypeTV.text = movies.type
+                movieYearTV.text = movies.year
+            }
         }
     }
 
