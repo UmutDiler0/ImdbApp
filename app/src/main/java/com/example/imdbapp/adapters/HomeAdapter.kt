@@ -1,18 +1,15 @@
 package com.example.imdbapp.adapters
 
-import android.graphics.Movie
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.imdbapp.R
-import com.example.imdbapp.databinding.FragmentHomeBinding
 import com.example.imdbapp.databinding.HomeItemBinding
 import com.example.imdbapp.main.MainRepo
 import com.example.imdbapp.models.Movies
-import javax.inject.Inject
+
 
 class HomeAdapter(val list: List<Movies>,val mainRepo: MainRepo): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
@@ -32,7 +29,6 @@ class HomeAdapter(val list: List<Movies>,val mainRepo: MainRepo): RecyclerView.A
             }else{
                 binding.movieIV.setImageResource(R.drawable.ic_error)
             }
-
         }
     }
 
@@ -44,7 +40,17 @@ class HomeAdapter(val list: List<Movies>,val mainRepo: MainRepo): RecyclerView.A
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(list[position],)
+        var isClicked = false
+        holder.binding.favBtn.setOnClickListener {
+            if(isClicked){
+                holder.binding.favBtn.setImageResource(R.drawable.ic_unfav)
+                isClicked = false
+            }else{
+                holder.binding.favBtn.setImageResource(R.drawable.ic_fav)
+                isClicked = true
+            }
+        }
     }
 
 }
