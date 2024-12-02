@@ -45,6 +45,7 @@ class HomeFragment : Fragment() {
             delay(2000L)
             observeData()
         }
+
     }
 
     private fun observeData(){

@@ -11,9 +11,11 @@ interface MovieApi {
     @GET("imdb/imdbSearchByName")
     fun getMoviesByName(
         @Header("Authorization") token: String,
-        @Query("query") movieName: String = "Avatar",
+        @Query("query") movieName: String = "Avengers",
 //        @Query("year") year: String,
 //        @Query("type") type: String
     ): Call<MovieResponse>
+
+
 
 }
