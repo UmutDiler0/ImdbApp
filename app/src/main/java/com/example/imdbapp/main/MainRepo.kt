@@ -1,47 +1,33 @@
 package com.example.imdbapp.main
 
-import android.annotation.SuppressLint
 import android.util.Log
-import com.example.imdbapp.adapters.HomeAdapter
-import com.example.imdbapp.models.MovieResponse
+import com.example.imdbapp.models.Movies
 import com.example.imdbapp.repository.MovieApi
-import com.example.imdbapp.util.moviesList
 import com.example.imdbapp.util.token
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 class MainRepo @Inject constructor(
     val movieApi: MovieApi
 ) {
+
+    var apiList: MutableList<Movies> = mutableListOf()
     var isResponseSuccess = false
-    fun fetchData(adapter: HomeAdapter){
-        val call = movieApi.getMoviesByName(token)
 
+    suspend fun fetchData(): MutableList<Movies> {
 
-        call.enqueue(
-            object: Callback<MovieResponse>{
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                    if(response.isSuccessful){
-                        response.body()?.let{
-                            moviesList.clear()
-                            moviesList.addAll(it.result)
-                            adapter.notifyDataSetChanged()
-                            isResponseSuccess = it.success
-                        }
-                    }else{
-                        isResponseSuccess = false
-                    }
-                }
-
-                override fun onFailure(p0: Call<MovieResponse>, p1: Throwable) {
-                    println("")
-                }
-
+        return try{
+            val response = movieApi.getMoviesByName(token)
+            if (response.result.isNotEmpty()) {
+                apiList = response.result.toMutableList()
+                isResponseSuccess = true
+                apiList
+            } else {
+                mutableListOf()
             }
-        )
+        }catch(e: Exception){
+            Log.i("MainRepo","${e}")
+            mutableListOf()
+        }
 
     }
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="250dp"
     tools:context=".ui.dialog.FilterFragment">
 
     <androidx.appcompat.widget.AppCompatSpinner
@@ -28,9 +28,13 @@
         android:id="@+id/applyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/applybtn_bg"
         android:text="Apply"
         android:textAllCaps="false"
-        android:layout_marginTop="48dp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/whatWillBeOrderedSpinner"
         app:layout_constraintStart_toStartOf="@+id/whatWillBeOrderedSpinner"
         app:layout_constraintTop_toBottomOf="@+id/whatWillBeOrderedSpinner" />
@@ -40,6 +44,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/cancelbtn_bg"
+        android:textColor="@color/yellow"
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/applyBtn"
         app:layout_constraintStart_toStartOf="@+id/orderBySpinner"

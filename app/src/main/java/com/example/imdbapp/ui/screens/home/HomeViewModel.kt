@@ -1,22 +1,44 @@
 package com.example.imdbapp.ui.screens.home
 
 import androidx.lifecycle.ViewModel
-import com.example.imdbapp.models.MovieResponse
+import androidx.lifecycle.viewModelScope
+import com.example.imdbapp.adapters.HomeAdapter
+import com.example.imdbapp.main.MainRepo
 import com.example.imdbapp.models.Movies
+import com.example.imdbapp.util.moviesList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(): ViewModel() {
+class HomeViewModel @Inject constructor(
+    val mainRepo: MainRepo,
+) : ViewModel() {
 
+    private var _movieList = MutableStateFlow<List<Movies>>(mutableListOf())
+    val movieListVM get(): MutableStateFlow<List<Movies>> = _movieList
     private var _responseState = MutableStateFlow<Boolean>(false)
     val responseState get(): MutableStateFlow<Boolean> = _responseState
 
-    fun updateResponseState(success: Boolean) {
-        _responseState.update {
-            success
+    fun loadMovies(){
+
+        viewModelScope.launch{
+            if(mainRepo.isResponseSuccess){
+                _movieList.update {
+                    mutableListOf()
+                }
+
+            }else{
+                _movieList.update {
+                    mainRepo.fetchData()
+                }
+                _responseState.update {
+                    true
+                }
+
+            }
         }
     }
 

@@ -23,5 +23,7 @@
         android:id="@+id/filterFragment"
         android:name="com.example.imdbapp.ui.dialog.FilterFragment"
         android:label="fragment_filter"
-        tools:layout="@layout/fragment_filter" />
+        tools:layout="@layout/fragment_filter" >
+
+    </dialog>
 </navigation>

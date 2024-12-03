@@ -11,11 +11,11 @@ import com.example.imdbapp.main.MainRepo
 import com.example.imdbapp.models.Movies
 
 
-class HomeAdapter(val list: List<Movies>,val mainRepo: MainRepo): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(var list: List<Movies>,val mainRepo: MainRepo): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: HomeItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(movies: Movies){
-            if(mainRepo.isResponseSuccess){
+            if(!mainRepo.isResponseSuccess){
                 with(binding){
                     movieNameTV.text = movies.title
                     movieTypeTV.text = movies.type
