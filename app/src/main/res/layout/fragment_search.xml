@@ -16,6 +16,7 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/sv_bg"
         android:elevation="24dp"
+        android:queryHint="Search Here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_marginHorizontal="16dp"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="@+id/movieSearchView"
         app:layout_constraintStart_toStartOf="@+id/movieSearchView"
@@ -45,11 +47,12 @@
         android:id="@+id/searchedRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="120dp"
+        android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/movieSearchView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,9 @@ class MainRepo @Inject constructor(
 ) {
 
     var apiList: MutableList<Movies> = mutableListOf()
+    var searchedMovieList: MutableList<Movies> = mutableListOf()
     var isResponseSuccess = false
+    var isPromtSuccess = false
 
     suspend fun fetchData(): MutableList<Movies> {
 
@@ -29,6 +31,22 @@ class MainRepo @Inject constructor(
             mutableListOf()
         }
 
+    }
+
+    suspend fun searchMovieData(prompt: String?): MutableList<Movies>{
+        return try{
+            val response = movieApi.getMoviesByName(token,prompt!!)
+            if (response.result.isNotEmpty()) {
+                searchedMovieList = response.result.toMutableList()
+                isPromtSuccess = true
+                searchedMovieList
+            } else {
+                mutableListOf()
+            }
+        }catch(e: Exception){
+            Log.i("MainRepo","${e}")
+            mutableListOf()
+        }
     }
 
 }
