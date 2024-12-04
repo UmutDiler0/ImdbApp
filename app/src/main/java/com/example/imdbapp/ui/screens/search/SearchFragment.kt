@@ -86,10 +86,14 @@ class SearchFragment : Fragment() {
             launch{
                 viewModel.isSearched.collect{
                     if(it){
+                        binding.pleaseSearch.visibility = View.GONE
+                        binding.pleaseSearchText.visibility = View.GONE
                         binding.searchedRV.visibility = View.VISIBLE
 
 
                     }else{
+                        binding.pleaseSearch.visibility = View.VISIBLE
+                        binding.pleaseSearchText.visibility = View.VISIBLE
                         binding.searchedRV.visibility = View.GONE
                     }
                 }
