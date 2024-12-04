@@ -21,7 +21,8 @@
             android:layout_gravity="center|start"
             android:scaleType="centerCrop"
             android:layout_marginStart="8dp"
-            android:src="@drawable/ic_launcher_background"
+            android:background="@android:color/transparent"
+            tools:src="@drawable/ic_launcher_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

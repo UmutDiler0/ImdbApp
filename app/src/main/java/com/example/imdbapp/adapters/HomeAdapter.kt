@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.imdbapp.R
 import com.example.imdbapp.databinding.HomeItemBinding
 import com.example.imdbapp.main.MainRepo
@@ -24,6 +25,7 @@ class HomeAdapter(var list: List<Movies>,val mainRepo: MainRepo): RecyclerView.A
                 }
                 Glide.with(itemView.context)
                     .load(movies.poster)
+                    .apply(RequestOptions.circleCropTransform())
                     .error(R.drawable.ic_error)
                     .into(binding.movieIV)
             }else{
