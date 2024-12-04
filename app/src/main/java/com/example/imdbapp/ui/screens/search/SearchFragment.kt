@@ -25,6 +25,9 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
+    //ikinci prompta ilk listeyi silmek yerine arkasına yenisini ekliyor
+    // fiter ekrarnında default değerler olmalı ki kullaıcı ister sadece yıl ister sadece type ister her ikisi içinde sorgu yapabilsin
+
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private var searchText: String? = null

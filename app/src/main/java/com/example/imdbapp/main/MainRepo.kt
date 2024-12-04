@@ -21,7 +21,7 @@ class MainRepo @Inject constructor(
             val response = movieApi.getMoviesByName(token)
             if (response.result.isNotEmpty()) {
                 apiList = response.result.toMutableList()
-                isResponseSuccess = true
+                isResponseSuccess = false
                 apiList
             } else {
                 mutableListOf()
@@ -37,8 +37,9 @@ class MainRepo @Inject constructor(
         return try{
             val response = movieApi.getMoviesByName(token,prompt!!)
             if (response.result.isNotEmpty()) {
+                searchedMovieList.clear()
                 searchedMovieList = response.result.toMutableList()
-                isPromtSuccess = true
+//                isPromtSuccess = true
                 searchedMovieList
             } else {
                 mutableListOf()

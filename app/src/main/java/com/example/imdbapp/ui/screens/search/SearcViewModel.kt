@@ -28,9 +28,11 @@ class SearcViewModel @Inject constructor(
             if(mainRepo.isPromtSuccess){
                 _searchMovieList.update {
                     mutableListOf()
+
                 }
             }else{
                 _searchMovieList.update {
+
                     mainRepo.searchMovieData(searchedText)
                 }
                 _isSearched.update {
