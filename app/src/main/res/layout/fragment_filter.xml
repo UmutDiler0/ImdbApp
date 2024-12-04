@@ -6,8 +6,18 @@
     android:layout_height="250dp"
     tools:context=".ui.dialog.FilterFragment">
 
+    <TextView
+        android:id="@+id/yearTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Year"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/orderYearSpinner"
+        app:layout_constraintStart_toStartOf="@+id/orderYearSpinner" />
+
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/orderBySpinner"
+        android:id="@+id/orderYearSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -15,8 +25,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/typeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/orderTypeSpinner"
+        app:layout_constraintStart_toStartOf="@+id/orderTypeSpinner" />
+
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/whatWillBeOrderedSpinner"
+        android:id="@+id/orderTypeSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
@@ -35,9 +55,9 @@
         android:textColor="@color/white"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/whatWillBeOrderedSpinner"
-        app:layout_constraintStart_toStartOf="@+id/whatWillBeOrderedSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/whatWillBeOrderedSpinner" />
+        app:layout_constraintEnd_toEndOf="@+id/orderTypeSpinner"
+        app:layout_constraintStart_toStartOf="@+id/orderTypeSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/orderTypeSpinner" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancelBtn"
@@ -49,7 +69,7 @@
         android:textColor="@color/yellow"
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/applyBtn"
-        app:layout_constraintStart_toStartOf="@+id/orderBySpinner"
+        app:layout_constraintStart_toStartOf="@+id/orderYearSpinner"
         app:layout_constraintTop_toTopOf="@+id/applyBtn" />
 
 

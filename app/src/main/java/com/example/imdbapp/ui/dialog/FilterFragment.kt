@@ -27,7 +27,6 @@ class FilterFragment : DialogFragment() {
         "Year",
         "Type"
     )
-    var selectedFilterType: String? = null
     var selectedFilterItem: String? = null
     @Inject lateinit var mainRepo: MainRepo
 
@@ -45,57 +44,29 @@ class FilterFragment : DialogFragment() {
         val filtersAdapter = ArrayAdapter(requireContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listOfFilters)
         filtersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        binding.orderBySpinner.adapter = filtersAdapter
-        binding.orderBySpinner.setSelection(0)
-        binding.orderBySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when(listOfFilters[position]){
-                    "Year" -> {
-                        selectedFilterType = "Year"
-                        selectYear()
-                    }
-                    "Type" -> {
-                        selectedFilterType = "Type"
-                        selectType()
-                    }
-                }
-            }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Do nothing
-            }
-        }
+        selectYear()
+        selectType()
 
 //        binding.applyBtn.setOnClickListener {
 //            it as AppCompatButton
 //            it.clicked(it.id)
 //        }
-//        binding.cancelBtn.setOnClickListener {
-//            it as AppCompatButton
-//            it.clicked(it.id)
-//        }
+        binding.cancelBtn.setOnClickListener {
+            dismiss()
+        }
 
     }
 
-//    private fun AppCompatButton.clicked(id: Int){
-//        if(id == R.id.applyBtn){
-//            if(selectedFilterType == "Year") {
-//                mainRepo.movieApi.getMoviesByName(token, selectedFilterItem!!)
-//            }else{
-//                mainRepo.movieApi.getMoviesByName(token, selectedFilterItem!!)
-//            }
-//        }else{
-//            dismiss()
-//        }
-//    }
+
 
     private fun selectYear(){
 
         val years = (1980..2024).map{it.toString()}
         val yearsAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, years)
         yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.whatWillBeOrderedSpinner.adapter = yearsAdapter
-        binding.whatWillBeOrderedSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.orderYearSpinner.adapter = yearsAdapter
+        binding.orderYearSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedFilterItem = years[position]
             }
@@ -112,8 +83,8 @@ class FilterFragment : DialogFragment() {
         val types = listOf("Movie", "Series", "Game")
         val typesAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
         typesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.whatWillBeOrderedSpinner.adapter = typesAdapter
-        binding.whatWillBeOrderedSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.orderTypeSpinner.adapter = typesAdapter
+        binding.orderTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selectedFilterItem = types[position]
             }
