@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:titleTextColor="@color/yellow"
-        app:menu="@menu/toolbar_menu"
         app:title="Movies"/>
 
     <FrameLayout
