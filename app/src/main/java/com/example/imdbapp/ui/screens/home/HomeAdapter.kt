@@ -27,6 +27,11 @@ class HomeAdapter(
                     movieTypeTV.text = movies.type
                     movieYearTV.text = movies.year
                     progressBar.visibility = View.GONE
+                    favoritedMovies.forEach{
+                        if(it.imdbID == movies.imdbID){
+                            binding.favBtn.setImageResource(R.drawable.ic_fav)
+                        }
+                    }
                 }
                 Glide.with(itemView.context)
                     .load(movies.poster)
@@ -47,32 +52,33 @@ class HomeAdapter(
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position],)
+        holder.bind(list[position])
         var isClicked = false
         holder.binding.favBtn.setOnClickListener {
             if(isClicked){
-
-                if(!favoritedMovies.contains(list[position])){
+                holder.binding.favBtn.setImageResource(R.drawable.ic_unfav)
+                if(favoritedMovies.contains(list[position])){
                     favoritedMovies.remove(list[position])
                     favoritedMovies.forEach {
-                        it.isFavorite = false
-                        holder.binding.favBtn.setImageResource(R.drawable.ic_unfav)
+                        if(it.imdbID == list[position].imdbID){
+                            it.isFavorite = false
+                        }
                     }
                 }
                 isClicked = false
             }else{
-
+                holder.binding.favBtn.setImageResource(R.drawable.ic_fav)
                 if(!favoritedMovies.contains(list[position])){
                     favoritedMovies.add(list[position])
                     favoritedMovies.forEach {
-                        it.isFavorite = true
-                        holder.binding.favBtn.setImageResource(R.drawable.ic_fav)
+                        if(it.imdbID == list[position].imdbID){
+                            it.isFavorite = true
+                        }
                     }
                 }
                 isClicked = true
             }
         }
     }
-
 
 }
