@@ -7,5 +7,6 @@ data class Movies(
     @SerializedName("Title") val title: String,
     @SerializedName("Type") val type: String,
     @SerializedName("Year") val year: String,
-    @SerializedName("imdbID") val imdbID: String
+    @SerializedName("imdbID") val imdbID: String,
+    var isFavorite: Boolean = false
 )

@@ -3,16 +3,21 @@ package com.example.imdbapp.ui.screens.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.imdbapp.R
+import com.example.imdbapp.common.util.favoritedMovies
 import com.example.imdbapp.databinding.HomeItemBinding
 import com.example.imdbapp.data.repository.MainRepo
 import com.example.imdbapp.data.models.Movies
 
 
-class HomeAdapter(var list: List<Movies>, val mainRepo: MainRepo): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(
+    var list: List<Movies>,
+    val mainRepo: MainRepo,
+): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: HomeItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(movies: Movies){
@@ -46,13 +51,28 @@ class HomeAdapter(var list: List<Movies>, val mainRepo: MainRepo): RecyclerView.
         var isClicked = false
         holder.binding.favBtn.setOnClickListener {
             if(isClicked){
-                holder.binding.favBtn.setImageResource(R.drawable.ic_unfav)
+
+                if(!favoritedMovies.contains(list[position])){
+                    favoritedMovies.remove(list[position])
+                    favoritedMovies.forEach {
+                        it.isFavorite = false
+                        holder.binding.favBtn.setImageResource(R.drawable.ic_unfav)
+                    }
+                }
                 isClicked = false
             }else{
-                holder.binding.favBtn.setImageResource(R.drawable.ic_fav)
+
+                if(!favoritedMovies.contains(list[position])){
+                    favoritedMovies.add(list[position])
+                    favoritedMovies.forEach {
+                        it.isFavorite = true
+                        holder.binding.favBtn.setImageResource(R.drawable.ic_fav)
+                    }
+                }
                 isClicked = true
             }
         }
     }
+
 
 }

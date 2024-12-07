@@ -26,4 +26,9 @@
         tools:layout="@layout/fragment_filter" >
 
     </dialog>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.imdbapp.ui.screens.fav.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

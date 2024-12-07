@@ -80,6 +80,7 @@ class SearchFragment : Fragment() {
         with(lifecycleScope) {
             launch {
                 viewModel.searchMovieList.collect {
+                    searchedList.clear()
                     searchedList.addAll(it)
                     val searchedAdapter = HomeAdapter(searchedList, mainRepo)
                     binding.searchedRV.adapter = searchedAdapter
