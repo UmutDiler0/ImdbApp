@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="250dp"
-    tools:context=".ui.dialog.FilterFragment">
+    tools:context=".ui.screens.dialog.FilterFragment">
 
     <TextView
         android:id="@+id/yearTV"

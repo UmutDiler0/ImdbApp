@@ -7,13 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.imdbapp.adapters.HomeAdapter
 import com.example.imdbapp.databinding.FragmentHomeBinding
-import com.example.imdbapp.main.MainRepo
-import com.example.imdbapp.util.moviesList
+import com.example.imdbapp.data.repository.MainRepo
+import com.example.imdbapp.common.util.moviesList
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

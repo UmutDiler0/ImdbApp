@@ -1,11 +1,10 @@
 package com.example.imdbapp.di
 
-import com.example.imdbapp.repository.MovieApi
-import com.example.imdbapp.util.BASE_URL
+import com.example.imdbapp.data.soruce.MovieApi
+import com.example.imdbapp.common.util.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

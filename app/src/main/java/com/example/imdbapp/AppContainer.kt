@@ -1,4 +1,4 @@
-package com.example.imdbapp.di
+package com.example.imdbapp
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

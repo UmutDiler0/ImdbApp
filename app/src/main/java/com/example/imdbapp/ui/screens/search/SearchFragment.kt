@@ -11,12 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.imdbapp.R
-import com.example.imdbapp.adapters.HomeAdapter
-import com.example.imdbapp.adapters.SearchingAdapter
+import com.example.imdbapp.ui.screens.home.HomeAdapter
 import com.example.imdbapp.databinding.FragmentSearchBinding
-import com.example.imdbapp.main.MainRepo
-import com.example.imdbapp.util.searchedList
-import com.example.imdbapp.util.searchingList
+import com.example.imdbapp.data.repository.MainRepo
+import com.example.imdbapp.common.util.searchedList
+import com.example.imdbapp.common.util.searchingList
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -27,6 +26,7 @@ class SearchFragment : Fragment() {
 
     //ikinci prompta ilk listeyi silmek yerine arkasına yenisini ekliyor
     // fiter ekrarnında default değerler olmalı ki kullaıcı ister sadece yıl ister sadece type ister her ikisi içinde sorgu yapabilsin
+    // aynı pormp iki defa girilince hiçbir şey yapmasın
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
@@ -60,7 +60,7 @@ class SearchFragment : Fragment() {
         binding.searchingRV.adapter = searchingAdapter
 
         binding.movieSearchView.setOnQueryTextListener(
-            object: SearchView.OnQueryTextListener{
+            object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     searchText = query
                     viewModel.isUserSearched(searchText)
@@ -76,25 +76,25 @@ class SearchFragment : Fragment() {
         observeData()
     }
 
-    fun observeData(){
-        with(lifecycleScope){
-            launch{
-                viewModel.searchMovieList.collect{
+    fun observeData() {
+        with(lifecycleScope) {
+            launch {
+                viewModel.searchMovieList.collect {
                     searchedList.addAll(it)
-                    val searchedAdapter = HomeAdapter(searchedList,mainRepo)
+                    val searchedAdapter = HomeAdapter(searchedList, mainRepo)
                     binding.searchedRV.adapter = searchedAdapter
                     searchedAdapter.notifyDataSetChanged()
                 }
             }
-            launch{
-                viewModel.isSearched.collect{
-                    if(it){
+            launch {
+                viewModel.isSearched.collect {
+                    if (it) {
                         binding.pleaseSearch.visibility = View.GONE
                         binding.pleaseSearchText.visibility = View.GONE
                         binding.searchedRV.visibility = View.VISIBLE
 
 
-                    }else{
+                    } else {
                         binding.pleaseSearch.visibility = View.VISIBLE
                         binding.pleaseSearchText.visibility = View.VISIBLE
                         binding.searchedRV.visibility = View.GONE

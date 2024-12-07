@@ -1,4 +1,4 @@
-package com.example.imdbapp.adapters
+package com.example.imdbapp.ui.screens.home
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +8,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.imdbapp.R
 import com.example.imdbapp.databinding.HomeItemBinding
-import com.example.imdbapp.main.MainRepo
-import com.example.imdbapp.models.Movies
+import com.example.imdbapp.data.repository.MainRepo
+import com.example.imdbapp.data.models.Movies
 
 
-class HomeAdapter(var list: List<Movies>,val mainRepo: MainRepo): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(var list: List<Movies>, val mainRepo: MainRepo): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: HomeItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(movies: Movies){

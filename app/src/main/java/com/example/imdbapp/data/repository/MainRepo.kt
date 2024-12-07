@@ -1,9 +1,9 @@
-package com.example.imdbapp.main
+package com.example.imdbapp.data.repository
 
 import android.util.Log
-import com.example.imdbapp.models.Movies
-import com.example.imdbapp.repository.MovieApi
-import com.example.imdbapp.util.token
+import com.example.imdbapp.data.models.Movies
+import com.example.imdbapp.data.soruce.MovieApi
+import com.example.imdbapp.common.util.token
 import javax.inject.Inject
 
 class MainRepo @Inject constructor(
@@ -21,7 +21,7 @@ class MainRepo @Inject constructor(
             val response = movieApi.getMoviesByName(token)
             if (response.result.isNotEmpty()) {
                 apiList = response.result.toMutableList()
-                isResponseSuccess = false
+//                isResponseSuccess = false
                 apiList
             } else {
                 mutableListOf()

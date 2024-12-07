@@ -2,10 +2,8 @@ package com.example.imdbapp.ui.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.imdbapp.adapters.HomeAdapter
-import com.example.imdbapp.main.MainRepo
-import com.example.imdbapp.models.Movies
-import com.example.imdbapp.util.moviesList
+import com.example.imdbapp.data.repository.MainRepo
+import com.example.imdbapp.data.models.Movies
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update

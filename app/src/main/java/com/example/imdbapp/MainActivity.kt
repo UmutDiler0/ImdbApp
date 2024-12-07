@@ -1,4 +1,4 @@
-package com.example.imdbapp.ui
+package com.example.imdbapp
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.imdbapp.R
 import com.example.imdbapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

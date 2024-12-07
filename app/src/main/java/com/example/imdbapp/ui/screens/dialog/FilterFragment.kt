@@ -1,20 +1,14 @@
-package com.example.imdbapp.ui.dialog
+package com.example.imdbapp.ui.screens.dialog
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.findNavController
-import com.example.imdbapp.R
 import com.example.imdbapp.databinding.FragmentFilterBinding
-import com.example.imdbapp.main.MainRepo
-import com.example.imdbapp.util.token
+import com.example.imdbapp.data.repository.MainRepo
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

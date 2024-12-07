@@ -1,4 +1,4 @@
-package com.example.imdbapp.models
+package com.example.imdbapp.data.models
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,10 +1,9 @@
-package com.example.imdbapp.adapters
+package com.example.imdbapp.ui.screens.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.imdbapp.databinding.SearchingItemBinding
-import com.example.imdbapp.main.MainRepo
 
 class SearchingAdapter(val list: MutableList<String>): RecyclerView.Adapter<SearchingAdapter.ViewHolder>() {
 
