@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
-    tools:context=".ui.screens.dialog.FilterFragment">
+    android:layout_height="200dp"
+    android:background="@drawable/filterfragment_bg"
+    android:elevation="24dp">
 
     <TextView
         android:id="@+id/yearTV"
@@ -43,34 +44,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/applyBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/applybtn_bg"
-        android:text="Apply"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/orderTypeSpinner"
-        app:layout_constraintStart_toStartOf="@+id/orderTypeSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/orderTypeSpinner" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/cancelBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/cancelbtn_bg"
-        android:textColor="@color/yellow"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@+id/applyBtn"
-        app:layout_constraintStart_toStartOf="@+id/orderYearSpinner"
-        app:layout_constraintTop_toTopOf="@+id/applyBtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

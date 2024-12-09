@@ -6,18 +6,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.SearchView
+import android.widget.Spinner
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.transition.Visibility
 import com.example.imdbapp.R
 import com.example.imdbapp.common.util.searchText
 import com.example.imdbapp.ui.screens.home.HomeAdapter
 import com.example.imdbapp.databinding.FragmentSearchBinding
 import com.example.imdbapp.data.repository.MainRepo
 import com.example.imdbapp.common.util.searchedList
-import com.example.imdbapp.common.util.searchingList
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -26,16 +31,22 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    // filtreleme işlemini yap
-    // fiter ekrarnında default değerler olmalı ki kullaıcı ister sadece yıl ister sadece type ister her ikisi içinde sorgu yapabilsin
+    // dialog fragment ile dismiss() ile dialogtan çıkınca ui güncellenmiyor
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-
-
     @Inject
     lateinit var mainRepo: MainRepo
     val viewModel: SearcViewModel by viewModels()
+    val listOfFilters: List<String> = listOf(
+        "Year",
+        "Type"
+    )
+
+
+    var selectedTypeItem: String? = null
+    var selectedYearItem: String? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,17 +59,23 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val filtersAdapter = ArrayAdapter(requireContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listOfFilters)
+        filtersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
         binding.filterBtn.setOnClickListener {
-            if (searchedList.isNotEmpty()) {
-                findNavController().navigate(R.id.action_searchFragment_to_filterFragment)
-            } else {
-                Snackbar.make(view, "Please Search Movie First", Snackbar.LENGTH_LONG).show()
+            lifecycleScope.launch {
+                viewModel.searchMovieList.collect{
+                    if(it.isNotEmpty()){
+                        showDialogWithSpinners()
+                    }else{
+                        Snackbar.make(view,"Pleae Search Movie First",Snackbar.LENGTH_LONG).show()
+                    }
+                }
             }
         }
+
         val searchedAdapter = HomeAdapter(searchedList.toList(), mainRepo)
         binding.searchedRV.adapter = searchedAdapter
-        val searchingAdapter = SearchingAdapter(searchingList)
-        binding.searchingRV.adapter = searchingAdapter
 
         binding.movieSearchView.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
@@ -81,29 +98,109 @@ class SearchFragment : Fragment() {
     fun observeData() {
         with(lifecycleScope) {
             launch {
-                viewModel.searchMovieList.collect {
-                    searchedList.clear()
-                    searchedList.addAll(it)
-                    val searchedAdapter = HomeAdapter(searchedList, mainRepo)
-                    binding.searchedRV.adapter = searchedAdapter
-                    searchedAdapter.notifyDataSetChanged()
+                viewModel.isFiltered.collect{
+                    if(it){
+                        viewModel.filteredList.collect {
+                            val searchedAdapter = HomeAdapter(it, mainRepo)
+                            binding.searchedRV.adapter = searchedAdapter
+                            searchedAdapter.notifyDataSetChanged()
+                        }
+                    }else{
+                        viewModel.searchMovieList.collect{
+                            val searchedAdapter = HomeAdapter(it, mainRepo)
+                            binding.searchedRV.adapter = searchedAdapter
+                            searchedAdapter.notifyDataSetChanged()
+                        }
+                    }
                 }
             }
             launch {
                 viewModel.isSearched.collect {
                     if (it) {
-                        binding.pleaseSearch.visibility = View.GONE
-                        binding.pleaseSearchText.visibility = View.GONE
-                        binding.searchedRV.visibility = View.VISIBLE
+                        setView(View.GONE,View.GONE,View.VISIBLE)
+
                     } else {
-                        binding.pleaseSearch.visibility = View.VISIBLE
-                        binding.pleaseSearchText.visibility = View.VISIBLE
-                        binding.searchedRV.visibility = View.GONE
+                        setView(View.VISIBLE,View.VISIBLE,View.GONE)
                     }
                 }
             }
         }
     }
+    private fun setView(pleaseSearchView:Int,pleaseSearchTextView: Int,searchedRVView:Int){
+        with(binding){
+            pleaseSearch.visibility = pleaseSearchView
+            pleaseSearchText.visibility = pleaseSearchTextView
+            searchedRV.visibility = searchedRVView
+        }
+    }
+
+    private fun applyFilter(selectedYear: String?, selectedType: String?){
+        var applyYear: String? = selectedYear
+        var applyType: String? = selectedType
+        if(applyType == "Type"){
+            applyType = null
+        }
+        if(applyYear == "Year"){
+            applyYear = null
+        }
+        viewModel.getFilteredList(applyYear,applyType)
+    }
+
+    private fun showDialogWithSpinners() {
+
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.custom_dialog,null)
+
+        val years: MutableList<String> = mutableListOf("Year")
+        val year = (1980..2024).map{it.toString()}
+        years.addAll(year)
+
+        val yearsAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, years)
+        yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        val types = listOf("Type","Movie", "Series", "Game")
+        val typesAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
+        typesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        val yearSpinner = dialogView.findViewById<Spinner>(R.id.orderYearSpinner)
+        val typeSpinner = dialogView.findViewById<Spinner>(R.id.orderTypeSpinner)
+
+        yearSpinner.adapter = yearsAdapter
+        typeSpinner.adapter = typesAdapter
+
+        yearSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedYearItem = years[position]
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing
+            }
+        }
+
+        typeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedTypeItem = types[position]
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing
+            }
+        }
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setView(dialogView)
+        builder.setTitle("Filter")
+        builder.setPositiveButton("Apply") { dialog, _ ->
+            applyFilter(selectedYearItem,selectedTypeItem)
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
+
 }
 
 
