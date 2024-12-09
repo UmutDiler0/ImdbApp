@@ -9,6 +9,7 @@ var moviesList = mutableListOf<Movies>()
 var searchingList = mutableListOf<String>()
 var searchedList = mutableListOf<Movies>()
 var favoritedMovies = mutableListOf<Movies>()
+var searchText: String? = null
 
 
 

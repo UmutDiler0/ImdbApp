@@ -50,4 +50,26 @@ class MainRepo @Inject constructor(
         }
     }
 
+    suspend fun searchFilteredMovies(
+        promptTitle: String,
+        promptYear: String?,
+        promptType: String?
+    ): MutableList<Movies>{
+        return try{
+            val response = movieApi.getMoviesByName(token,promptTitle,promptYear,promptType)
+            if (response.result.isNotEmpty()) {
+                searchedMovieList.clear()
+                searchedMovieList = response.result.toMutableList()
+//                isPromtSuccess = true
+                searchedMovieList
+            } else {
+                mutableListOf()
+            }
+        }catch(e: Exception){
+            Log.i("MainRepo","${e}")
+            mutableListOf()
+        }
+    }
+
+
 }

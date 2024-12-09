@@ -2,6 +2,9 @@ package com.example.imdbapp.ui.screens.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.imdbapp.common.util.searchText
+import com.example.imdbapp.common.util.searchedList
+import com.example.imdbapp.common.util.token
 import com.example.imdbapp.data.repository.MainRepo
 import com.example.imdbapp.data.models.Movies
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,16 +24,17 @@ class SearcViewModel @Inject constructor(
     private var _isSearched = MutableStateFlow<Boolean>(false)
     val isSearched get(): MutableStateFlow<Boolean> = _isSearched
 
+    private var _filteredList = MutableStateFlow<MutableList<Movies>>(mutableListOf())
+    val filteredList get(): MutableStateFlow<MutableList<Movies>> = _filteredList
+
     fun isUserSearched(searchedText: String?) {
         viewModelScope.launch {
             if (mainRepo.isPromtSuccess) {
                 _searchMovieList.update {
                     mutableListOf()
-
                 }
             } else {
                 _searchMovieList.update {
-
                     mainRepo.searchMovieData(searchedText)
                 }
                 _isSearched.update {
@@ -38,7 +42,14 @@ class SearcViewModel @Inject constructor(
                 }
             }
         }
+    }
 
+    fun getFilteredList(applyYear: String?, applyType: String?){
+        viewModelScope.launch {
+            _filteredList.update {
+                mainRepo.searchFilteredMovies( searchText!!,applyYear,applyType)
+            }
+        }
     }
 
 }

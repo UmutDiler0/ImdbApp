@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import com.example.imdbapp.databinding.FragmentFilterBinding
 import com.example.imdbapp.data.repository.MainRepo
+import com.example.imdbapp.ui.screens.search.SearcViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,6 +25,7 @@ class FilterFragment : DialogFragment() {
     )
     var selectedFilterItem: String? = null
     @Inject lateinit var mainRepo: MainRepo
+    private val viewModel : SearcViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,24 +42,38 @@ class FilterFragment : DialogFragment() {
         filtersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
 
-        selectYear()
-        selectType()
+        var selectedYear = selectYear()
+        var selectedType = selectType()
 
-//        binding.applyBtn.setOnClickListener {
-//            it as AppCompatButton
-//            it.clicked(it.id)
-//        }
+        binding.applyBtn.setOnClickListener {
+            applyFilter(selectedYear,selectedType)
+            dismiss()
+        }
         binding.cancelBtn.setOnClickListener {
             dismiss()
         }
 
     }
 
+    private fun applyFilter(selectedYear: String?, selectedType: String?){
+        var applyYear: String? = selectedYear
+        var applyType: String? = selectedType
+        if(applyType == "Type"){
+            applyType = null
+        }
+        if(applyYear == "Year"){
+            applyYear = null
+        }
+        viewModel.getFilteredList(applyYear,applyType)
+    }
 
 
-    private fun selectYear(){
 
-        val years = (1980..2024).map{it.toString()}
+    private fun selectYear(): String?{
+
+        val years: MutableList<String> = mutableListOf("Year")
+        val year = (1980..2024).map{it.toString()}
+        years.addAll(year)
         val yearsAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, years)
         yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.orderYearSpinner.adapter = yearsAdapter
@@ -69,12 +86,13 @@ class FilterFragment : DialogFragment() {
                 // Do nothing
             }
         }
+        return selectedFilterItem
 
     }
 
-    private fun selectType(){
+    private fun selectType(): String?{
 
-        val types = listOf("Movie", "Series", "Game")
+        val types = listOf("Type","Movie", "Series", "Game")
         val typesAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
         typesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.orderTypeSpinner.adapter = typesAdapter
@@ -87,6 +105,7 @@ class FilterFragment : DialogFragment() {
                 // Do nothing
             }
         }
+        return selectedFilterItem
 
     }
 

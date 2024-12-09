@@ -1,5 +1,6 @@
 package com.example.imdbapp.ui.screens.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.imdbapp.R
+import com.example.imdbapp.common.util.searchText
 import com.example.imdbapp.ui.screens.home.HomeAdapter
 import com.example.imdbapp.databinding.FragmentSearchBinding
 import com.example.imdbapp.data.repository.MainRepo
@@ -24,13 +26,12 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
 
-    //ikinci prompta ilk listeyi silmek yerine arkasına yenisini ekliyor
+    // filtreleme işlemini yap
     // fiter ekrarnında default değerler olmalı ki kullaıcı ister sadece yıl ister sadece type ister her ikisi içinde sorgu yapabilsin
-    // aynı pormp iki defa girilince hiçbir şey yapmasın
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-    private var searchText: String? = null
+
 
     @Inject
     lateinit var mainRepo: MainRepo
@@ -76,6 +77,7 @@ class SearchFragment : Fragment() {
         observeData()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun observeData() {
         with(lifecycleScope) {
             launch {
@@ -93,8 +95,6 @@ class SearchFragment : Fragment() {
                         binding.pleaseSearch.visibility = View.GONE
                         binding.pleaseSearchText.visibility = View.GONE
                         binding.searchedRV.visibility = View.VISIBLE
-
-
                     } else {
                         binding.pleaseSearch.visibility = View.VISIBLE
                         binding.pleaseSearchText.visibility = View.VISIBLE

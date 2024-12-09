@@ -32,7 +32,6 @@ class HomeViewModel @Inject constructor(
                     _movieList.update {
                         mutableListOf()
                     }
-
                 }else{
                     _movieList.update {
                         mainRepo.fetchData()
