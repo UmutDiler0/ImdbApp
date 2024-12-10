@@ -19,10 +19,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    // filter işlemini applya basılınca search ekranında olacak şekilde yap ama önce kullanıcıdan bir arama iste gelen sonuçları rc de göster sonra filtreleme yap
-    // applya tıklanınca home fragmenta gitme nv graphtan actionu kaldır
-
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     @Inject lateinit var mainRepo: MainRepo
@@ -49,10 +45,11 @@ class HomeFragment : Fragment() {
             launch{
                 viewModel.movieListVM.collect{
                     moviesList.addAll(it)
-                    val adapter = HomeAdapter(moviesList, mainRepo)
+                    val adapter = HomeAdapter(moviesList, mainRepo){string->
+                        val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(string)
+                        findNavController().navigate(action)
+                    }
                     binding.homeRC.adapter = adapter
-//                    val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(adapter.imdbId)
-//                    findNavController().navigate(action)
                     adapter.notifyDataSetChanged()
                 }
             }

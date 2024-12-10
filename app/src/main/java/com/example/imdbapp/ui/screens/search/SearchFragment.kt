@@ -73,7 +73,10 @@ class SearchFragment : Fragment() {
             }
         }
 
-        val searchedAdapter = HomeAdapter(searchedList.toList(), mainRepo)
+        val searchedAdapter = HomeAdapter(searchedList.toList(), mainRepo){
+            val action = SearchFragmentDirections.actionSearchFragmentToDetailFragment(it)
+            findNavController().navigate(action)
+        }
         binding.searchedRV.adapter = searchedAdapter
 
         binding.movieSearchView.setOnQueryTextListener(
@@ -125,7 +128,10 @@ class SearchFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setAdapter(movieList: MutableList<Movies>){
-        val searchedAdapter = HomeAdapter(movieList, mainRepo)
+        val searchedAdapter = HomeAdapter(movieList, mainRepo){
+            val action = SearchFragmentDirections.actionSearchFragmentToDetailFragment(it)
+            findNavController().navigate(action)
+        }
         binding.searchedRV.adapter = searchedAdapter
         searchedAdapter.notifyDataSetChanged()
     }

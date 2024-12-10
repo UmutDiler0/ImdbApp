@@ -18,7 +18,7 @@ import com.example.imdbapp.data.models.Movies
 class HomeAdapter(
     var list: List<Movies>,
     val mainRepo: MainRepo,
-//    val onItemClicked: () -> Unit
+    val onItemClicked: (String) -> Unit
 ): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     var imdbId: String? = null
@@ -37,9 +37,9 @@ class HomeAdapter(
                             binding.favBtn.setImageResource(R.drawable.ic_fav)
                         }
                     }
-//                    binding.cardItem.setOnClickListener { view ->
-//                        onItemClicked()
-//                    }
+                    binding.cardItem.setOnClickListener { view ->
+                        onItemClicked(movies.imdbID)
+                    }
                 }
                 Glide.with(itemView.context)
                     .load(movies.poster)
