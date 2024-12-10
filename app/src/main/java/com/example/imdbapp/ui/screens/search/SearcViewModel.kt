@@ -72,7 +72,7 @@ class SearcViewModel @Inject constructor(
         }
     }
 
-    fun setFiltered(){
+    fun setFilteredFalse(){
         viewModelScope.launch{
             _isFiltered.update{
                 false

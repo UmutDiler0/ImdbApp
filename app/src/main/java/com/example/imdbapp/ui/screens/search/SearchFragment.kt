@@ -23,6 +23,7 @@ import com.example.imdbapp.ui.screens.home.HomeAdapter
 import com.example.imdbapp.databinding.FragmentSearchBinding
 import com.example.imdbapp.data.repository.MainRepo
 import com.example.imdbapp.common.util.searchedList
+import com.example.imdbapp.data.models.Movies
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -82,6 +83,7 @@ class SearchFragment : Fragment() {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     searchText = query
                     viewModel.isUserSearched(searchText)
+                    viewModel.setFilteredFalse()
                     return true
                 }
 
@@ -101,15 +103,11 @@ class SearchFragment : Fragment() {
                 viewModel.isFiltered.collect{
                     if(it){
                         viewModel.filteredList.collect {
-                            val searchedAdapter = HomeAdapter(it, mainRepo)
-                            binding.searchedRV.adapter = searchedAdapter
-                            searchedAdapter.notifyDataSetChanged()
+                            setAdapter(it)
                         }
                     }else{
                         viewModel.searchMovieList.collect{
-                            val searchedAdapter = HomeAdapter(it, mainRepo)
-                            binding.searchedRV.adapter = searchedAdapter
-                            searchedAdapter.notifyDataSetChanged()
+                            setAdapter(it)
                         }
                     }
                 }
@@ -126,6 +124,14 @@ class SearchFragment : Fragment() {
             }
         }
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun setAdapter(movieList: MutableList<Movies>){
+        val searchedAdapter = HomeAdapter(movieList, mainRepo)
+        binding.searchedRV.adapter = searchedAdapter
+        searchedAdapter.notifyDataSetChanged()
+    }
+
     private fun setView(pleaseSearchView:Int,pleaseSearchTextView: Int,searchedRVView:Int){
         with(binding){
             pleaseSearch.visibility = pleaseSearchView
@@ -192,6 +198,7 @@ class SearchFragment : Fragment() {
         builder.setTitle("Filter")
         builder.setPositiveButton("Apply") { dialog, _ ->
             applyFilter(selectedYearItem,selectedTypeItem)
+            observeData()
             dialog.dismiss()
         }
         builder.setNegativeButton("Cancel") { dialog, _ ->
