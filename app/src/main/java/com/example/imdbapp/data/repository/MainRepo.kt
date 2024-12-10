@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.imdbapp.data.models.Movies
 import com.example.imdbapp.data.soruce.MovieApi
 import com.example.imdbapp.common.util.token
+import com.example.imdbapp.data.models.DetailItem
 import javax.inject.Inject
 
 class MainRepo @Inject constructor(
@@ -50,6 +51,20 @@ class MainRepo @Inject constructor(
         }
     }
 
+    suspend fun getMoviesWithID(movieID: String): DetailItem?{
+
+        return try{
+            val response = movieApi.getMoviesByID(token,movieID)
+            if(response.success){
+                response.result
+            }else{
+                null
+            }
+        }catch (e:Exception){
+            Log.i("MainRepo","${e}")
+            null
+        }
+    }
 
 
 }

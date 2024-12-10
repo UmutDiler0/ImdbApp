@@ -5,13 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.imdbapp.R
+import com.example.imdbapp.common.util.token
+import com.example.imdbapp.data.repository.MainRepo
 import com.example.imdbapp.databinding.FragmentDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     val binding get() = _binding!!
+    @Inject lateinit var mainRepo: MainRepo
+    private val viewModel: DetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +34,33 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        arguments?.let {
+            val imdbId = DetailFragmentArgs.fromBundle(it).imdbID
+            lifecycleScope.launch{
+                val movie= mainRepo.getMoviesWithID(imdbId!!)!!
+                binding.titleTV.text = movie.title
+                binding.yearFromApi.text = movie.year
+                binding.genreFromApi.text = movie.genre
+                binding.directorFromApi.text = movie.director
+                binding.actorsTV.text = movie.actors
+                binding.plotTV.text = movie.plot
+                Glide.with(requireContext())
+                    .load(movie.poster)
+                    .error(R.drawable.ic_error)
+                    .into(binding.detaitPosterIV)
+                binding.awardsFromApi.text = movie.awards
+                binding.ratedFromApi.text = movie.imdbRating
+                binding.writerFromApi.text = movie.writer
+                binding.languageFromApi.text = movie.language
+                binding.countryFromApi.text = movie.country
+                binding.runtimeFromApi.text = movie.runtime
+                binding.firstSourceRating.text = movie.ratings[0].value
+                binding.secondSourceRating.text = movie.ratings[1].value
+                binding.thirdSourceRating.text = movie.ratings[2].value
+            }
+
+        }
     }
 
     override fun onDestroyView() {

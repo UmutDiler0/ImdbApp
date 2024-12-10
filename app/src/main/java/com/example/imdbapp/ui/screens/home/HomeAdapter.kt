@@ -18,8 +18,10 @@ import com.example.imdbapp.data.models.Movies
 class HomeAdapter(
     var list: List<Movies>,
     val mainRepo: MainRepo,
-    val onItemClicked: () -> Unit
+//    val onItemClicked: () -> Unit
 ): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+
+    var imdbId: String? = null
 
     inner class ViewHolder(val binding: HomeItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(movies: Movies){
@@ -29,14 +31,15 @@ class HomeAdapter(
                     movieTypeTV.text = movies.type
                     movieYearTV.text = movies.year
                     progressBar.visibility = View.GONE
+                    imdbId = movies.imdbID
                     favoritedMovies.forEach{
                         if(it.imdbID == movies.imdbID){
                             binding.favBtn.setImageResource(R.drawable.ic_fav)
                         }
                     }
-                    binding.cardItem.setOnClickListener { view ->
-                        onItemClicked()
-                    }
+//                    binding.cardItem.setOnClickListener { view ->
+//                        onItemClicked()
+//                    }
                 }
                 Glide.with(itemView.context)
                     .load(movies.poster)

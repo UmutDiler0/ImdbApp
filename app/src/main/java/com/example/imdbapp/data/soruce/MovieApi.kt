@@ -1,5 +1,6 @@
 package com.example.imdbapp.data.soruce
 
+import com.example.imdbapp.data.models.DetailMovie
 import com.example.imdbapp.data.models.MovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -15,6 +16,10 @@ interface MovieApi {
         @Query("type") type: String? = null
     ): MovieResponse
 
-
+    @GET("imdb/imdbSearchById/")
+    suspend fun getMoviesByID(
+        @Header("Authorization") token: String,
+        @Query("movieId") imdbID: String
+    ): DetailMovie
 
 }

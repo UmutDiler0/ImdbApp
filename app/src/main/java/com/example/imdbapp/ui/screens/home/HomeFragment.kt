@@ -49,10 +49,10 @@ class HomeFragment : Fragment() {
             launch{
                 viewModel.movieListVM.collect{
                     moviesList.addAll(it)
-                    val adapter = HomeAdapter(moviesList, mainRepo){
-                        findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
-                    }
+                    val adapter = HomeAdapter(moviesList, mainRepo)
                     binding.homeRC.adapter = adapter
+//                    val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(adapter.imdbId)
+//                    findNavController().navigate(action)
                     adapter.notifyDataSetChanged()
                 }
             }

@@ -1,8 +1,10 @@
 package com.example.imdbapp.data.models
 
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
-data class Result(
+@Serializable
+data class DetailItem(
     @SerializedName("Actors") val actors: String,
     @SerializedName("Awards") val awards: String,
     @SerializedName("BoxOffice") val boxOffice: String,

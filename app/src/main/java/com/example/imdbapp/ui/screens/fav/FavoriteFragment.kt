@@ -46,9 +46,7 @@ class FavoriteFragment : Fragment() {
             viewModel.getFavoritedMovies()
             viewModel.favoritedMovieList.collect{
                 it.clear()
-                val adapter = HomeAdapter(it,mainRepo){
-                    findNavController().navigate(R.id.action_favoriteFragment_to_detailFragment)
-                }
+                val adapter = HomeAdapter(it,mainRepo)
                 binding.favoritedRC.adapter = adapter
                 adapter.notifyDataSetChanged()
             }
