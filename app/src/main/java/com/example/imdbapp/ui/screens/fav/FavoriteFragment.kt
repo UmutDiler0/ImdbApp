@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.imdbapp.R
 import com.example.imdbapp.common.util.favoritedMovies
 import com.example.imdbapp.data.repository.MainRepo
@@ -45,7 +46,9 @@ class FavoriteFragment : Fragment() {
             viewModel.getFavoritedMovies()
             viewModel.favoritedMovieList.collect{
                 it.clear()
-                val adapter = HomeAdapter(it,mainRepo)
+                val adapter = HomeAdapter(it,mainRepo){
+                    findNavController().navigate(R.id.action_favoriteFragment_to_detailFragment)
+                }
                 binding.favoritedRC.adapter = adapter
                 adapter.notifyDataSetChanged()
             }

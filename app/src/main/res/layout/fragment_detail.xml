@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:fillViewport="true"
+    tools:context=".ui.screens.detail.DetailFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detailCL"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:background="@color/black">
+
+            <ImageView
+                android:id="@+id/detaitPosterIV"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/titleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/yellow"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detaitPosterIV"
+                tools:text="Inception" />
+
+            <TextView
+                android:id="@+id/plotTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleTV"
+                tools:text="A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O." />
+
+            <TextView
+                android:id="@+id/actors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Actors"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/plotTV"
+                app:layout_constraintTop_toBottomOf="@+id/plotTV" />
+
+            <TextView
+                android:id="@+id/actorsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/actors"
+                tools:text="Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy" />
+
+            <TextView
+                android:id="@+id/rated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Rated:"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/ratings"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+            <TextView
+                android:id="@+id/ratedFromApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/rated"
+                app:layout_constraintStart_toEndOf="@+id/rated"
+                app:layout_constraintTop_toTopOf="@+id/rated"
+                tools:text="PG-13" />
+
+            <TextView
+                android:id="@+id/writer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Writer:"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/actors"
+                app:layout_constraintTop_toBottomOf="@+id/actorsTV" />
+
+            <TextView
+                android:id="@+id/writerFromApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/writer"
+                app:layout_constraintStart_toEndOf="@+id/writer"
+                app:layout_constraintTop_toTopOf="@+id/writer"
+                tools:text="Christopher Nolan" />
+
+            <TextView
+                android:id="@+id/director"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Director:"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/writer"
+                app:layout_constraintTop_toBottomOf="@+id/writer" />
+
+            <TextView
+                android:id="@+id/directorFromApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/director"
+                app:layout_constraintStart_toEndOf="@+id/director"
+                app:layout_constraintTop_toTopOf="@+id/director"
+                tools:text="Christopher Nolan" />
+
+            <TextView
+                android:id="@+id/genre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Genre:"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/director"
+                app:layout_constraintTop_toBottomOf="@+id/director" />
+
+            <TextView
+                android:id="@+id/genreFromApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/genre"
+                app:layout_constraintStart_toEndOf="@+id/genre"
+                app:layout_constraintTop_toTopOf="@+id/genre"
+                tools:text="Action, Adventure, Sci-Fi" />
+
+            <TextView
+                android:id="@+id/runtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Runtime:"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/genre"
+                app:layout_constraintTop_toBottomOf="@+id/genre" />
+
+            <TextView
+                android:id="@+id/runtimeFromApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/runtime"
+                app:layout_constraintStart_toEndOf="@+id/runtime"
+                app:layout_constraintTop_toTopOf="@+id/runtime"
+                tools:text="148 min" />
+
+            <TextView
+                android:id="@+id/year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Year:"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/runtime"
+                app:layout_constraintTop_toBottomOf="@+id/runtime" />
+
+            <TextView
+                android:id="@+id/yearFromApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/year"
+                app:layout_constraintStart_toEndOf="@+id/year"
+                app:layout_constraintTop_toTopOf="@+id/year"
+                tools:text="2010" />
+
+            <TextView
+                android:id="@+id/awards"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Awards:"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/year"
+                app:layout_constraintTop_toBottomOf="@+id/year" />
+
+            <TextView
+                android:id="@+id/awardsFromApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/awards"
+                app:layout_constraintStart_toEndOf="@+id/awards"
+                app:layout_constraintTop_toTopOf="@+id/awards"
+                tools:text="Won 4 Oscars. Another 152 wins  217 nominations." />
+
+            <TextView
+                android:id="@+id/language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Language:"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/awards"
+                app:layout_constraintTop_toBottomOf="@+id/awards" />
+
+            <TextView
+                android:id="@+id/languageFromApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/language"
+                app:layout_constraintStart_toEndOf="@+id/language"
+                app:layout_constraintTop_toTopOf="@+id/language"
+                tools:text="English, Japanese, French" />
+
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Country:"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/language"
+                app:layout_constraintTop_toBottomOf="@+id/language" />
+
+            <TextView
+                android:id="@+id/countryFromApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/country"
+                app:layout_constraintStart_toEndOf="@+id/country"
+                app:layout_constraintTop_toTopOf="@+id/country"
+                tools:text="USA, UK" />
+
+            <TextView
+                android:id="@+id/ratings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Ratings"
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/country"
+                app:layout_constraintTop_toBottomOf="@+id/country" />
+
+            <TextView
+                android:id="@+id/firstSource"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/secondSource"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ratings"
+                tools:text="Internet Movie Database" />
+
+            <TextView
+                android:id="@+id/firstSourceRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/firstSource"
+                app:layout_constraintStart_toStartOf="@+id/firstSource"
+                app:layout_constraintTop_toBottomOf="@+id/firstSource"
+                tools:text="8.8/10" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_star"
+                app:layout_constraintEnd_toEndOf="@+id/firstSourceRating"
+                app:layout_constraintStart_toStartOf="@+id/firstSourceRating"
+                app:layout_constraintTop_toBottomOf="@+id/firstSourceRating" />
+
+            <TextView
+                android:id="@+id/secondSource"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/thirdSource"
+                app:layout_constraintStart_toEndOf="@+id/firstSource"
+                app:layout_constraintTop_toTopOf="@+id/firstSource"
+                tools:text="Rotten Tomatoes" />
+
+            <TextView
+                android:id="@+id/secondSourceRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/secondSource"
+                app:layout_constraintStart_toStartOf="@+id/secondSource"
+                app:layout_constraintTop_toBottomOf="@+id/secondSource"
+                tools:text="87%" />
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_star"
+                app:layout_constraintEnd_toEndOf="@+id/secondSourceRating"
+                app:layout_constraintStart_toStartOf="@+id/secondSourceRating"
+                app:layout_constraintTop_toBottomOf="@+id/secondSourceRating" />
+
+            <TextView
+                android:id="@+id/thirdSource"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/secondSource"
+                app:layout_constraintTop_toTopOf="@+id/secondSource"
+                tools:text="Metacritic" />
+
+            <TextView
+                android:id="@+id/thirdSourceRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/thirdSource"
+                app:layout_constraintStart_toStartOf="@+id/thirdSource"
+                app:layout_constraintTop_toBottomOf="@+id/thirdSource"
+                tools:text="74/100" />
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_star"
+                app:layout_constraintEnd_toEndOf="@+id/thirdSourceRating"
+                app:layout_constraintStart_toStartOf="@+id/thirdSourceRating"
+                app:layout_constraintTop_toBottomOf="@+id/thirdSourceRating" />
+
+            <TextView
+                android:id="@+id/metacritic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Metacritic: "
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/rated"
+                app:layout_constraintTop_toBottomOf="@+id/rated" />
+
+            <TextView
+                android:id="@+id/metacriticRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/metacritic"
+                app:layout_constraintStart_toEndOf="@+id/metacritic"
+                app:layout_constraintTop_toTopOf="@+id/metacritic"
+                tools:text="74/100" />
+
+            <TextView
+                android:id="@+id/boxOffice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Box Office: "
+                android:textColor="@color/yellow"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/metacritic"
+                app:layout_constraintTop_toBottomOf="@+id/metacritic" />
+
+            <TextView
+                android:id="@+id/boxOfficeFromApi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/boxOffice"
+                app:layout_constraintStart_toEndOf="@+id/boxOffice"
+                app:layout_constraintTop_toTopOf="@+id/boxOffice"
+                tools:text="$292,576,195" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/detailPB"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:indeterminateTint="@color/yellow"
+        android:layout_gravity="center" />
+
+
+</FrameLayout>
+
+

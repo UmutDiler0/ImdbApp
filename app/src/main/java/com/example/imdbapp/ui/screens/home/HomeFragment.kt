@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.example.imdbapp.R
 import com.example.imdbapp.databinding.FragmentHomeBinding
 import com.example.imdbapp.data.repository.MainRepo
 import com.example.imdbapp.common.util.moviesList
@@ -47,7 +49,9 @@ class HomeFragment : Fragment() {
             launch{
                 viewModel.movieListVM.collect{
                     moviesList.addAll(it)
-                    val adapter = HomeAdapter(moviesList, mainRepo)
+                    val adapter = HomeAdapter(moviesList, mainRepo){
+                        findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
+                    }
                     binding.homeRC.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }

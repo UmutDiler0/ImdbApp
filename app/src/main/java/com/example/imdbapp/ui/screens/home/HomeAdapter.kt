@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -17,6 +18,7 @@ import com.example.imdbapp.data.models.Movies
 class HomeAdapter(
     var list: List<Movies>,
     val mainRepo: MainRepo,
+    val onItemClicked: () -> Unit
 ): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: HomeItemBinding): RecyclerView.ViewHolder(binding.root){
@@ -31,6 +33,9 @@ class HomeAdapter(
                         if(it.imdbID == movies.imdbID){
                             binding.favBtn.setImageResource(R.drawable.ic_fav)
                         }
+                    }
+                    binding.cardItem.setOnClickListener { view ->
+                        onItemClicked()
                     }
                 }
                 Glide.with(itemView.context)
