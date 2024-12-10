@@ -53,17 +53,35 @@ class SearcViewModel @Inject constructor(
 
     fun getFilteredList(applyYear: String?, applyType: String?) {
 
-        viewModelScope.launch {
-            val movieList: MutableList<Movies> = mutableListOf()
-            val filteredList: MutableList<Movies> = mutableListOf()
+        val movieList: MutableList<Movies> = mutableListOf()
+        val filteredList: MutableList<Movies> = mutableListOf()
 
-            movieList.addAll(_searchMovieList.value)
+        movieList.addAll(_searchMovieList.value)
 
+        if(applyYear == null && applyType == null){
+            filteredList.addAll(movieList)
+        }else if(applyType == null){
             filteredList.addAll(
                 movieList.filter {
-                    (it.year.equals(applyYear) || (it.type.equals(applyType)))
+                    it.year == applyYear
                 }
             )
+        }else if(applyYear == null){
+            filteredList.addAll(
+                movieList.filter {
+                    it.type == applyType
+                }
+            )
+        }else{
+            filteredList.addAll(
+                movieList.filter {
+                    (it.year.equals(applyYear) && (it.type.equals(applyType)))
+                }
+            )
+        }
+
+        viewModelScope.launch {
+
             _isFiltered.value = true
 
             _filteredList.update{

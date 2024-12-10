@@ -43,8 +43,6 @@ class SearchFragment : Fragment() {
         "Year",
         "Type"
     )
-
-
     var selectedTypeItem: String? = null
     var selectedYearItem: String? = null
 
@@ -143,10 +141,10 @@ class SearchFragment : Fragment() {
     private fun applyFilter(selectedYear: String?, selectedType: String?){
         var applyYear: String? = selectedYear
         var applyType: String? = selectedType
-        if(applyType == "Type"){
+        if(applyType == "type"){
             applyType = null
         }
-        if(applyYear == "Year"){
+        if(applyYear == "year"){
             applyYear = null
         }
         viewModel.getFilteredList(applyYear,applyType)
@@ -156,14 +154,14 @@ class SearchFragment : Fragment() {
 
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.custom_dialog,null)
 
-        val years: MutableList<String> = mutableListOf("Year")
+        val years: MutableList<String> = mutableListOf("year")
         val year = (1980..2024).map{it.toString()}
         years.addAll(year)
 
         val yearsAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, years)
         yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        val types = listOf("Type","Movie", "Series", "Game")
+        val types = listOf("type","movie", "series", "game")
         val typesAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
         typesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
